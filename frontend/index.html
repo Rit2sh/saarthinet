@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SaarthiNet – Voice Assistant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: #f2f4f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 420px;
+      height: 90vh;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .header {
+      background: #4f46e5;
+      color: white;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .chat {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+    }
+
+    .bubble {
+      max-width: 80%;
+      padding: 10px 14px;
+      margin-bottom: 10px;
+      border-radius: 12px;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .user {
+      background: #e0e7ff;
+      align-self: flex-end;
+      border-bottom-right-radius: 0;
+    }
+
+    .bot {
+      background: #f1f5f9;
+      align-self: flex-start;
+      border-bottom-left-radius: 0;
+    }
+
+    .status {
+      text-align: center;
+      font-size: 12px;
+      color: #6b7280;
+      margin-bottom: 6px;
+    }
+
+    .footer {
+      padding: 12px;
+      border-top: 1px solid #e5e7eb;
+      display: flex;
+      justify-content: center;
+    }
+
+    .mic-btn {
+      background: #4f46e5;
+      color: white;
+      border: none;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      font-size: 22px;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(79,70,229,0.4);
+    }
+
+    .mic-btn:active {
+      transform: scale(0.95);
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+  <div class="header">🧠 SaarthiNet – Voice Assistant</div>
+
+  <div class="chat" id="chat">
+    <div class="bubble bot">
+      नमस्ते 👋  
+      मैं Saarthi हूँ। आप मुझसे आवाज़ में सवाल पूछ सकते हैं।
+    </div>
+  </div>
+
+  <div class="status" id="status">Tap mic and speak</div>
+
+  <div class="footer">
+    <button class="mic-btn" onclick="startListening()">🎙️</button>
+  </div>
+</div>
+
+<script>
+  let recognition;
+  let isListening = false;
+
+  function addMessage(text, type) {
+    const chat = document.getElementById("chat");
+    const div = document.createElement("div");
+    div.className = `bubble ${type}`;
+    div.innerText = text;
+    chat.appendChild(div);
+    chat.scrollTop = chat.scrollHeight;
+  }
+
+  function startListening() {
+    if (isListening) return;
+
+    if (!("webkitSpeechRecognition" in window)) {
+      alert("Speech recognition not supported. Use Chrome.");
+      return;
+    }
+
+    recognition = new webkitSpeechRecognition();
+    recognition.lang = "hi-IN";
+    recognition.interimResults = false;
+
+    isListening = true;
+    document.getElementById("status").innerText = "🎧 Listening...";
+
+    recognition.start();
+
+    recognition.onresult = async function(event) {
+      const text = event.results[0][0].transcript;
+      addMessage(text, "user");
+
+      recognition.stop();
+      isListening = false;
+      document.getElementById("status").innerText = "🤔 Thinking...";
+
+      try {
+        const res = await fetch("http://localhost:3000/ask", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "testtoken"
+          },
+          body: JSON.stringify({ message: text })
+        });
+
+        const data = await res.json();
+        addMessage(data.reply, "bot");
+
+        const speech = new SpeechSynthesisUtterance(data.reply);
+        speech.lang = "hi-IN";
+        window.speechSynthesis.speak(speech);
+
+        document.getElementById("status").innerText = "Tap mic and speak";
+
+      } catch (err) {
+        addMessage("Server se response nahi mila.", "bot");
+        document.getElementById("status").innerText = "Error occurred";
+      }
+    };
+
+    recognition.onerror = function () {
+      isListening = false;
+      document.getElementById("status").innerText = "Tap mic and speak";
+    };
+  }
+</script>
+
+</body>
+</html>
