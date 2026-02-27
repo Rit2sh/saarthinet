@@ -1,129 +1,148 @@
-# 🧠 SaarthiNet
-### Voice-First AI + Cybersecurity Platform for Digital India 🇮🇳
+# 🎙️ SaarthiNet
+## Voice-First AI & Cybersecurity Platform
 
-SaarthiNet is a **voice-first digital infrastructure platform** designed to help
-**rural and non-technical users** securely access government, financial, and digital
-services using **Indian languages**.
+SaarthiNet is a **voice-first AI platform with a secure backend architecture** designed to provide **accessible, scalable, and secure digital services**.  
+The system enables **voice-based interactions** while ensuring **strong authentication, secure service communication, and high-performance backend APIs**.
 
-It combines:
-- **Saarthi AI** → Voice-based intelligent assistant  
-- **RakshaNet** → Built-in cybersecurity protection layer  
+This project demonstrates **backend engineering, AI service integration, and cybersecurity-first system design**.
 
 ---
 
-## 🚀 Problem Statement
-
-- Digital platforms are text-heavy and difficult to use
-- Language barriers restrict access to essential services
-- First-time internet users are vulnerable to cyber fraud
-- Rural users struggle with navigation and trust
-
----
-
-## 💡 Solution
-
-SaarthiNet enables:
-- 🎙️ Voice-based interaction (Hindi & English)
-- 🤖 AI-powered assistance for FAQs and services
-- 🔐 Secure APIs protected by RakshaNet
-- 🌐 Simple, low-bandwidth web interface
+## 🚀 Key Features
+- Voice-first AI backend APIs
+- Secure authentication & authorization
+- Scalable microservice-friendly architecture
+- Secure communication for sensitive data
+- High-performance API design
+- Cloud-ready backend services
+- Extensible for government & financial use cases
 
 ---
 
-## 🧩 Core Components
-
-### Saarthi AI
-- Speech-to-Text (Hindi / English)
-- NLP-based intent understanding
-- Context-aware responses
-- Text-to-Speech output
-
-### RakshaNet (Cybersecurity Layer)
-- JWT-based authentication
-- Rate limiting & abuse prevention
-- Request validation & logging
-- Basic anomaly detection
+## 🧠 System Design Overview
+- Client sends voice input to backend
+- Backend processes authentication & authorization
+- Voice input is forwarded to AI processing service
+- AI service returns structured responses
+- Backend securely stores logs & metadata
+- Response is delivered back to client
 
 ---
 
-## 🏗️ System Architecture 
+## 🏗️ Architecture Diagram
 
+
+---
+
+## 🔁 Request Flow
 
 ---
 
 ## 🛠️ Tech Stack
 
-### Frontend
-- HTML5, CSS3, JavaScript
-- Web Speech API
-
-### Backend
-- Node.js, Express.js
-- Python (FastAPI)
-- REST APIs
-
-### AI / NLP
-- Speech-to-Text (Whisper / Google STT)
-- Transformer-based NLP
-- Text-to-Speech (Hindi & English)
-
-### Security
-- JWT Authentication
-- Rate Limiting
-- API Gateway logic
-- Request logging
-
-### Database
-- MongoDB (users, logs)
-- PostgreSQL (secure records – optional)
-
-### DevOps / Cloud
-- Docker (basic)
-- AWS / GCP
-- Git & GitHub
+| Layer | Technology |
+|-----|-----------|
+| Backend API | Node.js, Express |
+| AI Services | Python |
+| Database | MongoDB |
+| Auth | JWT |
+| Architecture | Modular / Microservice-Ready |
+| Deployment | Cloud-Ready |
 
 ---
 
-## 📌 MVP Features
-
-- 🎙️ Voice-based questions & answers
-- 🌍 Hindi + English support
-- 🔊 Audio responses
-- 🔐 Secure API access
-- 📊 Request logging & monitoring
+## 📁 Project Structure
 
 ---
 
-## 🧪 Initial Use Cases
+## ⚙️ Installation & Setup
 
-- Government scheme guidance
-- Banking & finance FAQs
-- Digital document assistance
-- Voice-based service navigation
+### Prerequisites
+- Node.js >= 18
+- Python >= 3.9
+- MongoDB
+- Virtual environment (recommended)
 
 ---
 
-## 📁 Project Structure 
-saarthinet/
-├── frontend/
-│ └── index.html
-├── backend/
-│ ├── server.js
-│ ├── auth.js
-│ └── rateLimit.js
-├── ai-service/
-│ └── ai.py
-└── README.md
+### Clone Repository
+git clone https://github.com/your-username/saarthinet.git
+
+cd saarthinet
+
 ---
 
-## ▶️ How to Run Locally
-
-### 1️⃣ Install dependencies
-```bash
+### Backend Setup
+cd backend
 npm install
- npm start
- 
- 
+npm run dev
 
- 
+---
+
+### AI Service Setup
+cd ai-service
+pip install -r requirements.txt
+python speech_processor.py
+
+
+---
+
+## 🔐 Environment Variables
+
+PORT=3000
+MONGO_URI=mongodb://localhost:27017/saarthinet
+JWT_SECRET=your_secret_key
+AI_SERVICE_URL=http://localhost:5000
+
+
+---
+
+## 🔒 Security Features
+- JWT-based authentication
+- Role-based access control
+- Secure service-to-service communication
+- Input validation and sanitization
+- Configurable request limits
+
+---
+
+## 📊 Performance & Scalability
+- Optimized API response handling
+- Stateless backend design
+- Supports horizontal scaling
+- Modular AI service for independent scaling
+
+---
+
+## 🎯 Use Cases
+- Voice-based digital assistants
+- Secure access to government services
+- Financial service interaction via voice
+- Accessibility-focused platforms
+
+---
+
+## 📈 Future Enhancements
+- Multi-language voice support
+- End-to-end encryption
+- AI model optimization
+- Caching for frequent requests
+- Kubernetes deployment
+
+---
+
+## 🎯 Why This Project Matters
+This project showcases:
+- Voice-first system design
+- Secure backend architecture
+- AI service integration
+- Scalability and performance focus
+- Real-world cybersecurity considerations
+
+---
+
+## 👤 Author
+**Ritesh Chauhan**  
+Backend Software Engineer  
+
 
