@@ -66,7 +66,7 @@ This project demonstrates **backend engineering, AI service integration, and cyb
 ---
 
 ### Clone Repository
-git clone https://github.com/your-username/saarthinet.git
+git clone https://github.com/Rit2sh/saarthinet.git
 
 cd saarthinet
 
